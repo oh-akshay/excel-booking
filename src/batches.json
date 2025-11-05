@@ -1,0 +1,43 @@
+[
+  { "id": "mon-music-17", "dow": 1, "day": "Mon", "dateLabel": "3 NOV", "time": "5:00–7:00 PM", "subject": "Music", "level": "beginner", "coins": 5000, "seatsLeft": 4, "status": "open", "teacher": "Krishinthen Shanm…", "center": "HRBR" },
+  { "id": "mon-art-17", "dow": 1, "day": "Mon", "dateLabel": "3 NOV", "time": "5:00–7:00 PM", "subject": "Art & Design", "level": "beginner", "coins": 3000, "seatsLeft": 2, "status": "open", "teacher": "J Pavan Kumar", "center": "HRBR" },
+
+  { "id": "tue-art-17", "dow": 2, "day": "Tue", "dateLabel": "4 NOV", "time": "5:00–7:00 PM", "subject": "Art & Design", "level": "beginner", "coins": 3000, "seatsLeft": 4, "status": "open", "teacher": "J Pavan Kumar", "center": "HRBR" },
+  { "id": "tue-ps-17", "dow": 2, "day": "Tue", "dateLabel": "4 NOV", "time": "5:00–7:00 PM", "subject": "Public Speaking", "level": "beginner", "coins": 3000, "seatsLeft": 8, "status": "open", "teacher": "Zaiba Fathima", "center": "HRBR" },
+  { "id": "tue-music-17", "dow": 2, "day": "Tue", "dateLabel": "4 NOV", "time": "5:00–7:00 PM", "subject": "Music", "level": "beginner", "coins": 5000, "seatsLeft": 3, "status": "open", "teacher": "Krishinthen Shanm…", "center": "HRBR" },
+
+  { "id": "wed-ps-17", "dow": 3, "day": "Wed", "dateLabel": "5 NOV", "time": "5:00–7:00 PM", "subject": "Public Speaking", "level": "beginner", "coins": 3000, "seatsLeft": 0, "status": "closed", "teacher": "Zaiba Fathima", "center": "HRBR" },
+  { "id": "wed-music-17", "dow": 3, "day": "Wed", "dateLabel": "5 NOV", "time": "5:00–7:00 PM", "subject": "Music", "level": "beginner", "coins": 5000, "seatsLeft": 4, "status": "open", "teacher": "Krishinthen Shanm…", "center": "HRBR" },
+
+  { "id": "thu-art-17", "dow": 4, "day": "Thu", "dateLabel": "6 NOV", "time": "5:00–7:00 PM", "subject": "Art & Design", "level": "beginner", "coins": 3000, "seatsLeft": 9, "status": "open", "teacher": "J Pavan Kumar", "center": "HRBR" },
+  { "id": "thu-music-17", "dow": 4, "day": "Thu", "dateLabel": "6 NOV", "time": "5:00–7:00 PM", "subject": "Music", "level": "beginner", "coins": 5000, "seatsLeft": 5, "status": "open", "teacher": "Krishinthen Shanm…", "center": "HRBR" },
+
+  { "id": "fri-music-17", "dow": 5, "day": "Fri", "dateLabel": "7 NOV", "time": "5:00–7:00 PM", "subject": "Music", "level": "beginner", "coins": 5000, "seatsLeft": 4, "status": "open", "teacher": "Krishinthen Shanm…", "center": "HRBR" },
+  { "id": "fri-art-17", "dow": 5, "day": "Fri", "dateLabel": "7 NOV", "time": "5:00–7:00 PM", "subject": "Art & Design", "level": "beginner", "coins": 3000, "seatsLeft": 3, "status": "open", "teacher": "J Pavan Kumar", "center": "HRBR" },
+
+  { "id": "sat-art-10", "dow": 6, "day": "Sat", "dateLabel": "8 NOV", "time": "10:00–12:00 PM", "subject": "Art & Design", "level": "beginner", "coins": 3000, "seatsLeft": 10, "status": "open", "teacher": "J Pavan Kumar", "center": "HRBR" },
+  { "id": "sat-ps-10", "dow": 6, "day": "Sat", "dateLabel": "8 NOV", "time": "10:00–12:00 PM", "subject": "Public Speaking", "level": "beginner", "coins": 3000, "seatsLeft": 4, "status": "open", "teacher": "Zaiba Fathima", "center": "HRBR" },
+  { "id": "sat-music-10", "dow": 6, "day": "Sat", "dateLabel": "8 NOV", "time": "10:00–12:00 PM", "subject": "Music", "level": "beginner", "coins": 5000, "seatsLeft": 6, "status": "open", "teacher": "Krishinthen Shanm…", "center": "HRBR" },
+  { "id": "sat-art-12", "dow": 6, "day": "Sat", "dateLabel": "8 NOV", "time": "12:00–2:00 PM", "subject": "Art & Design", "level": "beginner", "coins": 3000, "seatsLeft": 8, "status": "open", "teacher": "J Pavan Kumar", "center": "HRBR" },
+  { "id": "sat-ps-12", "dow": 6, "day": "Sat", "dateLabel": "8 NOV", "time": "12:00–2:00 PM", "subject": "Public Speaking", "level": "beginner", "coins": 3000, "seatsLeft": 5, "status": "open", "teacher": "Zaiba Fathima", "center": "HRBR" },
+  { "id": "sat-music-12", "dow": 6, "day": "Sat", "dateLabel": "8 NOV", "time": "12:00–2:00 PM", "subject": "Music", "level": "beginner", "coins": 5000, "seatsLeft": 4, "status": "open", "teacher": "Krishinthen Shanm…", "center": "HRBR" },
+  { "id": "sat-art-15", "dow": 6, "day": "Sat", "dateLabel": "8 NOV", "time": "3:00–5:00 PM", "subject": "Art & Design", "level": "beginner", "coins": 3000, "seatsLeft": 7, "status": "open", "teacher": "J Pavan Kumar", "center": "HRBR" },
+  { "id": "sat-ps-15", "dow": 6, "day": "Sat", "dateLabel": "8 NOV", "time": "3:00–5:00 PM", "subject": "Public Speaking", "level": "beginner", "coins": 3000, "seatsLeft": 6, "status": "open", "teacher": "Zaiba Fathima", "center": "HRBR" },
+  { "id": "sat-music-15", "dow": 6, "day": "Sat", "dateLabel": "8 NOV", "time": "3:00–5:00 PM", "subject": "Music", "level": "beginner", "coins": 5000, "seatsLeft": 5, "status": "open", "teacher": "Krishinthen Shanm…", "center": "HRBR" },
+  { "id": "sat-ps-17", "dow": 6, "day": "Sat", "dateLabel": "8 NOV", "time": "5:00–7:00 PM", "subject": "Public Speaking", "level": "beginner", "coins": 3000, "seatsLeft": 8, "status": "open", "teacher": "Zaiba Fathima", "center": "HRBR" },
+  { "id": "sat-art-17", "dow": 6, "day": "Sat", "dateLabel": "8 NOV", "time": "5:00–7:00 PM", "subject": "Art & Design", "level": "beginner", "coins": 3000, "seatsLeft": 5, "status": "open", "teacher": "J Pavan Kumar", "center": "HRBR" },
+  { "id": "sat-music-17", "dow": 6, "day": "Sat", "dateLabel": "8 NOV", "time": "5:00–7:00 PM", "subject": "Music", "level": "beginner", "coins": 5000, "seatsLeft": 4, "status": "open", "teacher": "Krishinthen Shanm…", "center": "HRBR" },
+
+  { "id": "sun-art-10", "dow": 7, "day": "Sun", "dateLabel": "9 NOV", "time": "10:00–12:00 PM", "subject": "Art & Design", "level": "beginner", "coins": 3000, "seatsLeft": 9, "status": "open", "teacher": "J Pavan Kumar", "center": "HRBR" },
+  { "id": "sun-ps-10", "dow": 7, "day": "Sun", "dateLabel": "9 NOV", "time": "10:00–12:00 PM", "subject": "Public Speaking", "level": "beginner", "coins": 3000, "seatsLeft": 10, "status": "open", "teacher": "Zaiba Fathima", "center": "HRBR" },
+  { "id": "sun-music-10", "dow": 7, "day": "Sun", "dateLabel": "9 NOV", "time": "10:00–12:00 PM", "subject": "Music", "level": "beginner", "coins": 5000, "seatsLeft": 4, "status": "open", "teacher": "Krishinthen Shanm…", "center": "HRBR" },
+  { "id": "sun-art-12", "dow": 7, "day": "Sun", "dateLabel": "9 NOV", "time": "12:00–2:00 PM", "subject": "Art & Design", "level": "beginner", "coins": 3000, "seatsLeft": 8, "status": "open", "teacher": "J Pavan Kumar", "center": "HRBR" },
+  { "id": "sun-ps-12", "dow": 7, "day": "Sun", "dateLabel": "9 NOV", "time": "12:00–2:00 PM", "subject": "Public Speaking", "level": "beginner", "coins": 3000, "seatsLeft": 6, "status": "open", "teacher": "Zaiba Fathima", "center": "HRBR" },
+  { "id": "sun-music-12", "dow": 7, "day": "Sun", "dateLabel": "9 NOV", "time": "12:00–2:00 PM", "subject": "Music", "level": "beginner", "coins": 5000, "seatsLeft": 5, "status": "open", "teacher": "Krishinthen Shanm…", "center": "HRBR" },
+  { "id": "sun-art-15", "dow": 7, "day": "Sun", "dateLabel": "9 NOV", "time": "3:00–5:00 PM", "subject": "Art & Design", "level": "beginner", "coins": 3000, "seatsLeft": 7, "status": "open", "teacher": "J Pavan Kumar", "center": "HRBR" },
+  { "id": "sun-ps-15", "dow": 7, "day": "Sun", "dateLabel": "9 NOV", "time": "3:00–5:00 PM", "subject": "Public Speaking", "level": "beginner", "coins": 3000, "seatsLeft": 6, "status": "open", "teacher": "Zaiba Fathima", "center": "HRBR" },
+  { "id": "sun-music-15", "dow": 7, "day": "Sun", "dateLabel": "9 NOV", "time": "3:00–5:00 PM", "subject": "Music", "level": "beginner", "coins": 5000, "seatsLeft": 4, "status": "open", "teacher": "Krishinthen Shanm…", "center": "HRBR" },
+  { "id": "sun-art-17", "dow": 7, "day": "Sun", "dateLabel": "9 NOV", "time": "5:00–7:00 PM", "subject": "Art & Design", "level": "beginner", "coins": 3000, "seatsLeft": 7, "status": "open", "teacher": "J Pavan Kumar", "center": "HRBR" },
+  { "id": "sun-music-17", "dow": 7, "day": "Sun", "dateLabel": "9 NOV", "time": "5:00–7:00 PM", "subject": "Music", "level": "beginner", "coins": 5000, "seatsLeft": 4, "status": "open", "teacher": "Krishinthen Shanm…", "center": "HRBR" },
+  { "id": "sun-ps-17", "dow": 7, "day": "Sun", "dateLabel": "9 NOV", "time": "5:00–7:00 PM", "subject": "Public Speaking", "level": "beginner", "coins": 3000, "seatsLeft": 6, "status": "open", "teacher": "Zaiba Fathima", "center": "HRBR" }
+]
