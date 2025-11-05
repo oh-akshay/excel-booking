@@ -121,11 +121,12 @@ function TimeDivider({ label }) {
 
 export default function App() {
   const [selected, setSelected] = useState([]);
-  const [activeSubject, setActiveSubject] = useState("all");
   const [activeTimes, setActiveTimes] = useState(["morning", "midday", "afternoon", "evening"]);
   const [activeDay, setActiveDay] = useState(1); // Mon
   const [slots, setSlots] = useState(initialSlots);
   const sectionRefs = useRef({});
+  const allSubjects = useMemo(() => Array.from(new Set(slots.map((s) => s.subject))).sort(), [slots]);
+  const [activeSubjects, setActiveSubjects] = useState(allSubjects);
 
   const filtered = useMemo(() => {
     return slots
@@ -135,11 +136,11 @@ export default function App() {
           (activeTimes.includes("midday") && s.time.includes("12:00")) ||
           (activeTimes.includes("afternoon") && s.time.includes("3:00")) ||
           (activeTimes.includes("evening") && s.time.includes("5:00"));
-        const bySubject = activeSubject === "all" ? true : s.subject === activeSubject;
+        const bySubject = activeSubjects.length === 0 ? true : activeSubjects.includes(s.subject);
         return byTime && bySubject;
       })
       .sort((a, b) => a.dow - b.dow);
-  }, [slots, activeSubject, activeTimes]);
+  }, [slots, activeSubjects, activeTimes]);
 
   const toggle = (slot) => {
     setSelected((prev) => {
@@ -183,42 +184,39 @@ export default function App() {
         </div>
       </div>
 
-      {/* Filters */}
+      {/* Filters: Subject multiselect */}
       <div className="px-4 pt-4">
-        <div className="flex items-center justify-between">
-          <MultiTimeTabs
-            times={activeTimes}
-            onToggle={(id) =>
-              setActiveTimes((t) => (t.includes(id) ? t.filter((x) => x !== id) : [...t, id]))
-            }
-          />
-          <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex flex-wrap gap-1.5">
             <button
-              onClick={() =>
-                setSlots((s) =>
-                  s.concat({
-                    id: `sample-${Date.now()}`,
-                    dow: 2,
-                    day: "Tue",
-                    dateLabel: "",
-                    time: "5:00–7:00 PM",
-                    subject: "Art & Design",
-                    level: "beginner",
-                    coins: 3000,
-                    seatsLeft: 6,
-                    status: "open",
-                    teacher: "TBD",
-                    center: "HRBR",
-                  })
-                )
-              }
-              className="text-xs px-2 py-1 rounded-lg bg-gray-900 text-white"
+              className={classNames(
+                "px-2.5 py-1.5 rounded-lg text-xs font-medium",
+                activeSubjects.length === allSubjects.length ? "bg-black text-white" : "bg-gray-100 text-gray-800"
+              )}
+              onClick={() => setActiveSubjects(allSubjects)}
             >
-              Add Batch (demo)
+              All
             </button>
-            <div className="text-xs text-gray-500">
-              Center: <span className="font-semibold">HRBR</span>
-            </div>
+            {allSubjects.map((subj) => {
+              const on = activeSubjects.includes(subj);
+              return (
+                <button
+                  key={subj}
+                  onClick={() =>
+                    setActiveSubjects((prev) => (prev.includes(subj) ? prev.filter((s) => s !== subj) : [...prev, subj]))
+                  }
+                  className={classNames(
+                    "px-2.5 py-1.5 rounded-lg text-xs font-medium",
+                    on ? "bg-black text-white" : "bg-gray-100 text-gray-800"
+                  )}
+                >
+                  {subj}
+                </button>
+              );
+            })}
+          </div>
+          <div className="text-xs text-gray-500">
+            Center: <span className="font-semibold">HRBR</span>
           </div>
         </div>
       </div>
