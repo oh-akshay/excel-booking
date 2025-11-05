@@ -74,14 +74,24 @@ function MultiTimeTabs({ times, onToggle }) {
   );
 }
 
-function NudgeBanner({ count }) {
+function NudgeBanner({ count, offset = false }) {
   const cfg = count >= 4 ? null : (count < 2 ? { more: 2 - count, save: 1000 } : count === 2 ? { more: 1, save: 2500 } : { more: 1, save: 5000 });
   return (
     <AnimatePresence>
       {cfg && (
-        <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="px-4 mt-2">
-          <div className="rounded-xl bg-amber-50 ring-1 ring-amber-200 p-2 text-[12px]">
-            Add <span className="font-semibold">{cfg.more}</span> more to save <span className="font-semibold">{cfg.save.toLocaleString()}</span> coins this week.
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 16 }}
+          className={classNames(
+            "fixed inset-x-0 z-40",
+            offset ? "bottom-28" : "bottom-4"
+          )}
+        >
+          <div className="mx-auto max-w-md px-4">
+            <div className="rounded-full bg-amber-50 ring-1 ring-amber-200 px-3 py-2 text-[12px] text-center shadow-sm">
+              Add <span className="font-semibold">{cfg.more}</span> more to save <span className="font-semibold">₹{cfg.save.toLocaleString()}</span> / month
+            </div>
           </div>
         </motion.div>
       )}
@@ -124,9 +134,15 @@ export default function App() {
   const [activeTimes, setActiveTimes] = useState(["morning", "midday", "afternoon", "evening"]);
   const [activeDay, setActiveDay] = useState(1); // Mon
   const [slots, setSlots] = useState(initialSlots);
+  const [stage, setStage] = useState("intro"); // intro | planner
   const sectionRefs = useRef({});
   const allSubjects = useMemo(() => Array.from(new Set(slots.map((s) => s.subject))).sort(), [slots]);
   const [activeSubjects, setActiveSubjects] = useState(allSubjects);
+  const subjectPrices = useMemo(() => {
+    const out = {};
+    for (const s of slots) if (out[s.subject] == null) out[s.subject] = s.coins;
+    return out;
+  }, [slots]);
 
   const filtered = useMemo(() => {
     return slots
@@ -159,6 +175,72 @@ export default function App() {
       : selected.length === 3
       ? { more: 1, save: 5000 }
       : null;
+
+  // Intro page: pricing and discounts before planning
+  if (stage === "intro") {
+    return (
+      <div className="mx-auto max-w-md min-h-[100dvh] bg-white">
+        <div className="sticky top-0 z-40 bg-white/90 backdrop-blur">
+          <div className="px-4 py-3 flex items-center gap-3">
+            <div className="size-9 rounded-xl bg-black text-white grid place-items-center font-bold">oh</div>
+            <div>
+              <div className="text-sm text-gray-500 leading-tight">Openhouse Afterschool</div>
+              <div className="text-base font-bold">Pricing & Savings</div>
+            </div>
+            <div className="ml-auto text-xs text-gray-600">Center: HRBR</div>
+          </div>
+        </div>
+
+        <div className="px-4 py-4">
+          {/* Friendly hero */}
+          <div className="mt-1">
+            <div className="text-2xl font-bold tracking-tight">Let’s build your weekly plan</div>
+            <div className="text-sm text-gray-600 mt-1">Billed monthly. Save more as you add classes.</div>
+          </div>
+
+          {/* Soft chips for savings */}
+          <div className="mt-4">
+            <div className="text-sm font-semibold">Monthly savings</div>
+            <div className="mt-2 flex flex-wrap gap-2">
+              <span className="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-sm font-medium">2 classes · save ₹1,000 / month</span>
+              <span className="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-sm font-medium">3 classes · save ₹2,500 / month</span>
+              <span className="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-sm font-medium">4+ classes · save ₹5,000 / month</span>
+            </div>
+            <div className="mt-2 text-xs text-gray-600">Mix and match — same subject twice or different subjects both count toward savings. Applied automatically while you plan.</div>
+          </div>
+
+          {/* Simple price list (no boxes) */}
+          <div className="mt-6">
+            <div className="text-sm font-semibold">Per month prices</div>
+            <div className="mt-1 divide-y divide-gray-200">
+              {Object.keys(subjectPrices).map((k) => (
+                <div key={k} className="py-2 flex items-center justify-between text-sm">
+                  <div>{k}</div>
+                  <div className="font-semibold">₹{subjectPrices[k].toLocaleString()} / month</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Gentle next steps */}
+          <div className="mt-6">
+            <div className="text-sm font-semibold mb-1">What happens next</div>
+            <div className="space-y-1 text-sm text-gray-700">
+              <div>• Pick classes for the week.</div>
+              <div>• Watch your monthly savings grow.</div>
+              <div>• Review and confirm — you can change anytime.</div>
+            </div>
+            <button
+              className="mt-4 w-full px-4 py-2.5 rounded-xl bg-black text-white text-sm font-semibold active:scale-[0.99]"
+              onClick={() => setStage("planner")}
+            >
+              Start planning
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto max-w-md min-h-[100dvh] bg-white">
@@ -249,8 +331,8 @@ export default function App() {
         </div>
       </div>
 
-      {/* Discount nudge */}
-      <NudgeBanner count={selected.length} />
+      {/* Discount nudge (bottom pop) */}
+      <NudgeBanner count={selected.length} offset={selected.length > 0} />
 
       {/* Slots list grouped by day and time (clean, monochrome) */}
       <div className="px-4 mt-3 pb-28 space-y-5">
@@ -297,7 +379,7 @@ export default function App() {
                 <div>
                   <div className="text-xs text-gray-500">Weekly plan</div>
                   <div className="text-sm font-semibold">
-                    {selected.length} selection{selected.length === 1 ? "" : "s"} · {coins.toLocaleString()} coins
+                    {selected.length} selection{selected.length === 1 ? "" : "s"} · ₹{coins.toLocaleString()} / month
                   </div>
                   <AnimatePresence>
                     {discount > 0 && (
@@ -308,20 +390,22 @@ export default function App() {
                         exit={{ opacity: 0, y: -6 }}
                         className="text-xs mt-1 text-emerald-700"
                       >
-                        Savings applied: −{discount.toLocaleString()} coins
+                        You save ₹{discount.toLocaleString()} / month
                       </motion.div>
                     )}
                   </AnimatePresence>
                   {nextTarget && (
                     <div className="text-[11px] mt-1 text-gray-600">
-                      Add <span className="font-semibold">{nextTarget.more}</span> more to save{" "}
-                      <span className="font-semibold">{nextTarget.save.toLocaleString()}</span>
+                      Add <span className="font-semibold">{nextTarget.more}</span> more to save <span className="font-semibold">₹{nextTarget.save.toLocaleString()}</span> / month
                     </div>
                   )}
+                  <div className="text-[10px] mt-1 text-gray-500">
+                    Same subject twice or different subjects — both count toward savings.
+                  </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-xs text-gray-500">Due / week</div>
-                  <div className="text-base font-bold">{Math.max(0, coins - discount).toLocaleString()}</div>
+                  <div className="text-xs text-gray-500">Due / month</div>
+                  <div className="text-base font-bold">₹{Math.max(0, coins - discount).toLocaleString()}</div>
                 </div>
               </div>
               <button className="mt-2 w-full px-4 py-2 rounded-xl bg-black text-white text-sm font-semibold">
