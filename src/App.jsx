@@ -196,7 +196,7 @@ export default function App() {
               <div className="text-sm text-gray-500 leading-tight">Openhouse Afterschool</div>
               <div className="text-base font-bold">Pricing & Savings</div>
             </div>
-            <div className="ml-auto text-xs text-gray-600">Center: HRBR</div>
+            
           </div>
         </div>
 
@@ -339,7 +339,7 @@ export default function App() {
 
       {/* Filters: Subject multiselect */}
       <div className="px-4 pt-4">
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
           <div className="flex flex-wrap gap-1.5">
             <button
               className={classNames(
@@ -368,39 +368,10 @@ export default function App() {
               );
             })}
           </div>
-          <div className="text-xs text-gray-500">
-            Center: <span className="font-semibold">HRBR</span>
-          </div>
         </div>
       </div>
 
-      {/* Week overview (sticky once a schedule exists) */}
-      <div className={classNames("px-4 mt-3", selected.length > 0 && "sticky top-[92px] z-30 bg-white/90 backdrop-blur")}> 
-        <div className="text-[11px] font-semibold text-gray-500 mb-2 uppercase tracking-wide">Your week overview</div>
-        <div className="rounded-xl border border-dashed p-2">
-          <div className="grid grid-cols-7 text-[10px] text-gray-500 mb-1">
-            {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
-              <div className="text-center" key={d}>
-                {d}
-              </div>
-            ))}
-          </div>
-          <div className="grid grid-cols-7 gap-1.5">
-            {[1, 2, 3, 4, 5, 6, 7].map((d) => (
-              <div key={d} className="min-h-20 rounded-md bg-gray-50 p-1">
-                {selected
-                  .filter((s) => s.dow === d)
-                  .map((s) => (
-                    <div key={s.id} className="mb-1 rounded bg-gray-900 text-white px-1 py-0.5">
-                      <div className="text-[10px] font-medium truncate">{s.subject}</div>
-                      <div className="text-[9px] opacity-80 truncate">{s.time}</div>
-                    </div>
-                  ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      {/* Week overview removed per request */}
 
       {/* Discount nudge (bottom pop) */}
       <NudgeBanner count={selected.length} offset={selected.length > 0} />
