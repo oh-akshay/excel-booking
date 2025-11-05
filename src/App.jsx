@@ -134,7 +134,7 @@ export default function App() {
   const [activeTimes, setActiveTimes] = useState(["morning", "midday", "afternoon", "evening"]);
   const [activeDay, setActiveDay] = useState(1); // Mon
   const [slots, setSlots] = useState(initialSlots);
-  const [stage, setStage] = useState("intro"); // intro | planner
+  const [stage, setStage] = useState("intro"); // intro | planner | checkout
   const sectionRefs = useRef({});
   const allSubjects = useMemo(() => Array.from(new Set(slots.map((s) => s.subject))).sort(), [slots]);
   const [activeSubjects, setActiveSubjects] = useState(allSubjects);
@@ -143,6 +143,15 @@ export default function App() {
     for (const s of slots) if (out[s.subject] == null) out[s.subject] = s.coins;
     return out;
   }, [slots]);
+  const sortedSelected = useMemo(
+    () =>
+      [...selected].sort((a, b) =>
+        a.dow !== b.dow
+          ? a.dow - b.dow
+          : a.time.localeCompare(b.time) || a.subject.localeCompare(b.subject)
+      ),
+    [selected]
+  );
 
   const filtered = useMemo(() => {
     return slots
@@ -237,6 +246,68 @@ export default function App() {
               Start planning
             </button>
           </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Checkout page: summary and savings (cart)
+  if (stage === "checkout") {
+    const labelForDow = ["", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    const subtotal = coins;
+    const savings = discount;
+    const due = Math.max(0, subtotal - savings);
+    return (
+      <div className="mx-auto max-w-md min-h-[100dvh] bg-white">
+        <div className="sticky top-0 z-40 bg-white/90 backdrop-blur border-b">
+          <div className="px-4 py-3 flex items-center gap-3">
+            <button
+              onClick={() => setStage("planner")}
+              className="text-sm text-gray-600 hover:text-black"
+            >
+              ← Back
+            </button>
+            <div className="size-8 rounded-lg bg-black text-white grid place-items-center font-bold ml-1">oh</div>
+            <div className="font-bold text-base">Review & Confirm</div>
+            <div className="ml-auto text-xs text-gray-600">Billed monthly</div>
+          </div>
+        </div>
+
+        <div className="px-4 py-4">
+          <div className="text-sm text-gray-600 mb-2">Your selections</div>
+          <div className="divide-y divide-gray-200 rounded-lg ring-1 ring-gray-200 overflow-hidden bg-white">
+            {sortedSelected.map((s) => (
+              <div key={s.id} className="px-3 py-2 flex items-center gap-2">
+                <div className="text-xs text-gray-500 w-10">{labelForDow[s.dow]}</div>
+                <div className="text-xs text-gray-500 w-20">{s.time.replace(" PM", "").replace(" AM", "")}</div>
+                <div className="text-sm font-medium flex-1">{s.subject}</div>
+                <div className="text-sm font-semibold">₹{s.coins.toLocaleString()}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-4 rounded-xl bg-gray-50 ring-1 ring-gray-200 p-3">
+            <div className="flex items-center justify-between text-sm">
+              <div className="text-gray-600">Subtotal / month</div>
+              <div className="font-semibold">₹{subtotal.toLocaleString()}</div>
+            </div>
+            <div className="flex items-center justify-between text-sm mt-1">
+              <div className="text-gray-600">Savings</div>
+              <div className="font-semibold text-emerald-700">Save ₹{savings.toLocaleString()} / month</div>
+            </div>
+            <div className="h-px bg-gray-200 my-2" />
+            <div className="flex items-center justify-between">
+              <div className="text-sm text-gray-600">Due / month</div>
+              <div className="text-base font-bold">₹{due.toLocaleString()}</div>
+            </div>
+            <div className="mt-1 text-[10px] text-gray-500">
+              Same subject twice or different subjects — both count toward savings. Selections repeat weekly.
+            </div>
+          </div>
+
+          <button className="mt-4 w-full px-4 py-2.5 rounded-xl bg-black text-white text-sm font-semibold active:scale-[0.99]">
+            Confirm enrollment
+          </button>
         </div>
       </div>
     );
@@ -408,7 +479,10 @@ export default function App() {
                   <div className="text-base font-bold">₹{Math.max(0, coins - discount).toLocaleString()}</div>
                 </div>
               </div>
-              <button className="mt-2 w-full px-4 py-2 rounded-xl bg-black text-white text-sm font-semibold">
+              <button
+                className="mt-2 w-full px-4 py-2 rounded-xl bg-black text-white text-sm font-semibold"
+                onClick={() => setStage("checkout")}
+              >
                 Review & Confirm
               </button>
             </div>
